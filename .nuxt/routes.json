@@ -1,51 +1,51 @@
 [
   {
     "path": "/",
-    "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\Nuxt-demo\\\\pages\\\\layout",
+    "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\realworld-nuxtjs\\\\pages\\\\layout",
     "children": [
       {
-        "path": "/",
+        "path": "",
         "name": "home",
-        "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\Nuxt-demo\\\\pages\\\\home",
-        "_name": "_259b6e47"
+        "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\realworld-nuxtjs\\\\pages\\\\home",
+        "_name": "_98dcbfe6"
       },
       {
         "path": "/login",
         "name": "login",
-        "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\Nuxt-demo\\\\pages\\\\login",
-        "_name": "_e3eab9fe"
+        "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\realworld-nuxtjs\\\\pages\\\\login",
+        "_name": "_824aac0a"
       },
       {
         "path": "/register",
         "name": "register",
-        "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\Nuxt-demo\\\\pages\\\\login",
-        "_name": "_e3eab9fe"
+        "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\realworld-nuxtjs\\\\pages\\\\login",
+        "_name": "_824aac0a"
       },
       {
         "path": "/profile/:username",
         "name": "profile",
-        "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\Nuxt-demo\\\\pages\\\\profile",
-        "_name": "_0f14b741"
+        "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\realworld-nuxtjs\\\\pages\\\\profile",
+        "_name": "_4bfee7bb"
       },
       {
         "path": "/settings",
         "name": "settings",
-        "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\Nuxt-demo\\\\pages\\\\settings",
-        "_name": "_64c2418b"
+        "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\realworld-nuxtjs\\\\pages\\\\settings",
+        "_name": "_75c3bf5e"
       },
       {
         "path": "/editor",
         "name": "editor",
-        "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\Nuxt-demo\\\\pages\\\\editor",
-        "_name": "_26bde0d5"
+        "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\realworld-nuxtjs\\\\pages\\\\editor",
+        "_name": "_0feeb91b"
       },
       {
         "path": "/article/:slug",
         "name": "article",
-        "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\Nuxt-demo\\\\pages\\\\article",
-        "_name": "_14420ae4"
+        "component": "I:\\\\Web\\\\study\\\\Lagou\\\\part-3\\\\part3-3\\\\realworld-nuxtjs\\\\pages\\\\article",
+        "_name": "_32c92b08"
       }
     ],
-    "_name": "_328cba92"
+    "_name": "_1bbd92d8"
   }
 ]

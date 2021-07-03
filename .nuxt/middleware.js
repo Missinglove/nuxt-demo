@@ -3,7 +3,7 @@ const middleware = {}
 middleware['authenticated'] = require('..\\middleware\\authenticated.js')
 middleware['authenticated'] = middleware['authenticated'].default || middleware['authenticated']
 
-middleware['notauthenicated'] = require('..\\middleware\\notauthenicated.js')
-middleware['notauthenicated'] = middleware['notauthenicated'].default || middleware['notauthenicated']
+middleware['notAuthenticated'] = require('..\\middleware\\notAuthenticated.js')
+middleware['notAuthenticated'] = middleware['notAuthenticated'].default || middleware['notAuthenticated']
 
 export default middleware

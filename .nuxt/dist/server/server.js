@@ -115,7 +115,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -128,7 +128,7 @@ module.exports = require("vue");
 /* 1 */
 /***/ (function(module, exports) {
 
-module.exports = require("@nuxt/ufo");
+module.exports = require("ufo");
 
 /***/ }),
 /* 2 */
@@ -246,77 +246,84 @@ module.exports = require("vuex");
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = require("vue-router");
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
 module.exports = require("vue-no-ssr");
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return request; });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * 基于 axios 封装的请求模块
+ */
+ // 创建请求对象
 
 const request = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: "https://conduit.productionready.io"
-}); //插件导出只能做为默认成员
+  baseURL: 'http://realworld.api.fed.lagounews.com'
+}); // 通过插件机制获取到上下文对象（query、params、req、res、app、store...）
+// 插件导出函数必须作为 default 成员
 
 /* harmony default export */ __webpack_exports__["a"] = (({
   store
 }) => {
+  // 请求拦截器
+  // Add a request interceptor
+  // 任何请求都要经过请求拦截器
+  // 我们可以在请求拦截器中做一些公共的业务处理,例如统一设置 token
   request.interceptors.request.use(function (config) {
-    // Do something before request is sent       //设置token
+    // Do something before request is sent
+    // 请求就会经过这里
     const {
       user
     } = store.state;
 
     if (user && user.token) {
       config.headers.Authorization = `Token ${user.token}`;
-    }
+    } // 返回 config 请求配置对象
+
 
     return config;
   }, function (error) {
+    // 如果请求失败(此时请求还没有发出去)就会进入这里
     // Do something with request error
     return Promise.reject(error);
   });
 });
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports) {
 
 module.exports = require("vue-client-only");
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports) {
 
-module.exports = require("axios");
+module.exports = require("vue-router");
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(21);
+var content = __webpack_require__(20);
+if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-var add = __webpack_require__(12).default
+var add = __webpack_require__(11).default
 module.exports.__inject__ = function (context) {
-  add("171622a6", content, true, context)
+  add("4f32724b", content, true, context)
 };
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -416,23 +423,24 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(23);
+var content = __webpack_require__(22);
+if(content.__esModule) content = content.default;
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add CSS to SSR context
-var add = __webpack_require__(12).default
+var add = __webpack_require__(11).default
 module.exports.__inject__ = function (context) {
-  add("02ccb86d", content, true, context)
+  add("147985ea", content, true, context)
 };
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -442,7 +450,7 @@ __webpack_require__.r(__webpack_exports__);
 // EXPORTS
 __webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ addStylesServer; });
 
-// CONCATENATED MODULE: ./node_modules/_vue-style-loader@4.1.2@vue-style-loader/lib/listToStyles.js
+// CONCATENATED MODULE: ./node_modules/_vue-style-loader@4.1.3@vue-style-loader/lib/listToStyles.js
 /**
  * Translates the list format produced by css-loader into something
  * easier to manipulate.
@@ -471,7 +479,7 @@ function listToStyles (parentId, list) {
   return styles
 }
 
-// CONCATENATED MODULE: ./node_modules/_vue-style-loader@4.1.2@vue-style-loader/lib/addStylesServer.js
+// CONCATENATED MODULE: ./node_modules/_vue-style-loader@4.1.3@vue-style-loader/lib/addStylesServer.js
 
 
 function addStylesServer (parentId, list, isProduction, context) {
@@ -555,35 +563,54 @@ function renderStyles (styles) {
 
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-module.exports = require("querystring");
-
-/***/ }),
-/* 14 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("node-fetch");
 
 /***/ }),
-/* 15 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("vue-meta");
 
 /***/ }),
-/* 16 */
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
+
+/***/ }),
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("dayjs");
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(26);
+module.exports = __webpack_require__(25);
 
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/**
+ * 验证是否登录的中间件
+ */
+/* harmony default export */ __webpack_exports__["default"] = (function ({
+  store,
+  redirect
+}) {
+  // If the user is not authenticated
+  if (!store.state.user) {
+    return redirect('/login');
+  }
+});
 
 /***/ }),
 /* 18 */
@@ -591,17 +618,13 @@ module.exports = __webpack_require__(26);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//验证是否登陆过的中间件 如果用户没有登录的话就不能访问某些页面
-//以前是通过路由守卫做的现在不能这么玩儿了
-//哪个页面使用就在哪个页面调用中间件即可
 /* harmony default export */ __webpack_exports__["default"] = (function ({
   store,
   redirect
 }) {
-  //逻辑判断是否有登录过
-  if (!store.state.user) {
-    //如果没有登录直接跳转login页面
-    return redirect('/login');
+  // If the user is authenticated redirect to home page
+  if (store.state.user) {
+    return redirect('/');
   }
 });
 
@@ -611,67 +634,50 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (function ({
-  store,
-  redirect
-}) {
-  //逻辑判断是否有登录过
-  if (store.state.user) {
-    //如果没有登录直接跳转login页面
-    return redirect('/');
-  }
-});
+/* harmony import */ var _node_modules_vue_style_loader_4_1_3_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_4_3_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_7_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_7_vue_loader_lib_index_js_vue_loader_options_nuxt_error_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8);
+/* harmony import */ var _node_modules_vue_style_loader_4_1_3_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_4_3_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_7_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_7_vue_loader_lib_index_js_vue_loader_options_nuxt_error_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_4_1_3_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_4_3_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_7_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_7_vue_loader_lib_index_js_vue_loader_options_nuxt_error_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_4_1_3_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_4_3_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_7_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_7_vue_loader_lib_index_js_vue_loader_options_nuxt_error_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_4_1_3_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_4_3_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_7_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_7_vue_loader_lib_index_js_vue_loader_options_nuxt_error_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
 
 /***/ }),
 /* 20 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_4_1_2_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_nuxt_error_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
-/* harmony import */ var _node_modules_vue_style_loader_4_1_2_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_nuxt_error_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_4_1_2_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_nuxt_error_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_4_1_2_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_nuxt_error_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_4_1_2_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_nuxt_error_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(9);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".__nuxt-error-page{padding:1rem;background:#f7f8fb;color:#47494e;text-align:center;display:flex;justify-content:center;align-items:center;flex-direction:column;font-family:sans-serif;font-weight:100!important;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;position:absolute;top:0;left:0;right:0;bottom:0}.__nuxt-error-page .error{max-width:450px}.__nuxt-error-page .title{font-size:1.5rem;margin-top:15px;color:#47494e;margin-bottom:8px}.__nuxt-error-page .description{color:#7f828b;line-height:21px;margin-bottom:10px}.__nuxt-error-page a{color:#7f828b!important;text-decoration:none}.__nuxt-error-page .logo{position:fixed;left:12px;bottom:12px}", ""]);
+// Exports
+module.exports = ___CSS_LOADER_EXPORT___;
 
 
 /***/ }),
 /* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(10);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, ".__nuxt-error-page{padding:1rem;background:#f7f8fb;color:#47494e;text-align:center;display:flex;justify-content:center;align-items:center;flex-direction:column;font-family:sans-serif;font-weight:100!important;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;position:absolute;top:0;left:0;right:0;bottom:0}.__nuxt-error-page .error{max-width:450px}.__nuxt-error-page .title{font-size:1.5rem;margin-top:15px;color:#47494e;margin-bottom:8px}.__nuxt-error-page .description{color:#7f828b;line-height:21px;margin-bottom:10px}.__nuxt-error-page a{color:#7f828b!important;text-decoration:none}.__nuxt-error-page .logo{position:fixed;left:12px;bottom:12px}", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_4_1_2_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(11);
-/* harmony import */ var _node_modules_vue_style_loader_4_1_2_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_4_1_2_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_4_1_2_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_4_1_2_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_3_6_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_6_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_6_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_style_loader_4_1_3_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_4_3_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_7_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_7_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
+/* harmony import */ var _node_modules_vue_style_loader_4_1_3_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_4_3_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_7_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_7_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_4_1_3_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_4_3_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_7_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_7_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_4_1_3_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_4_3_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_7_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_7_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_4_1_3_vue_style_loader_index_js_ref_3_oneOf_1_0_node_modules_css_loader_4_3_0_css_loader_dist_cjs_js_ref_3_oneOf_1_1_node_modules_vue_loader_15_9_7_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_3_0_0_postcss_loader_src_index_js_ref_3_oneOf_1_2_node_modules_vue_loader_15_9_7_vue_loader_lib_index_js_vue_loader_options_nuxt_loading_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(9);
+var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+___CSS_LOADER_EXPORT___.push([module.i, ".nuxt-progress{position:fixed;top:0;left:0;right:0;height:2px;width:0;opacity:1;transition:width .1s,opacity .4s;background-color:#000;z-index:999999}.nuxt-progress.nuxt-progress-notransition{transition:none}.nuxt-progress-failed{background-color:red}", ""]);
+// Exports
+module.exports = ___CSS_LOADER_EXPORT___;
 
 
 /***/ }),
 /* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports
-var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(10);
-exports = ___CSS_LOADER_API_IMPORT___(false);
-// Module
-exports.push([module.i, ".nuxt-progress{position:fixed;top:0;left:0;right:0;height:2px;width:0;opacity:1;transition:width .1s,opacity .4s;background-color:#000;z-index:999999}.nuxt-progress.nuxt-progress-notransition{transition:none}.nuxt-progress-failed{background-color:red}", ""]);
-// Exports
-module.exports = exports;
-
-
-/***/ }),
-/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -679,85 +685,79 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "state", function() { return state; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mutations", function() { return mutations; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "actions", function() { return actions; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getters", function() { return getters; });
-const cookieParser =  true ? __webpack_require__(25) : undefined; //在服务端渲染期间运行都是同一个实例
-//防止数据冲突，必须把state定义陈一个函数，返回数据对象
+const cookieparser =  true ? __webpack_require__(24) : undefined; // 在服务端渲染期间运行都是同一个实例
+// 为了防止数据冲突，务必要把 state 定义成一个函数，返回数据对象
 
 const state = () => {
   return {
-    //当前用户的登陆状态
+    // 当前登录用户的登录状态
     user: null
   };
 };
 const mutations = {
-  setUser(state, user) {
-    state.user = user;
+  setUser(state, data) {
+    state.user = data;
   }
 
 };
 const actions = {
-  //nuxtServerInit服务端渲染自动调用
-  //作用;初始化容器数据，传递数据给客户端使用
+  // nuxtServerInit 是一个特殊的 action 方法
+  // 这个 action 会在服务端渲染期间自动调用
+  // 作用：初始化容器数据，传递数据给客户端使用
   nuxtServerInit({
     commit
   }, {
     req
   }) {
-    //定义初始用户
-    let user = null; //逻辑判断请求头中中是否有cookie
+    let user = null; // 如果请求头中有 Cookie
 
     if (req.headers.cookie) {
-      //将请求头中的cookie解析处理
-      const parsed = cookieParser.parse(req.headers.cookie);
+      // 使用 cookieparser 把 cookie 字符串转为 JavaScript 对象
+      const parsed = cookieparser.parse(req.headers.cookie);
 
       try {
-        //通常cookie是JSON对象 继续解析处理
         user = JSON.parse(parsed.user);
-      } catch (err) {}
-    }
+      } catch (err) {// No valid cookie found
+      }
+    } // 提交 mutation 修改 state 状态
 
-    ; //调用commit方法保存用户cookie
 
     commit('setUser', user);
   }
 
 };
-const getters = {};
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports) {
 
 module.exports = require("cookieparser");
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// EXTERNAL MODULE: external "querystring"
-var external_querystring_ = __webpack_require__(13);
-
 // EXTERNAL MODULE: external "vue"
 var external_vue_ = __webpack_require__(0);
 var external_vue_default = /*#__PURE__*/__webpack_require__.n(external_vue_);
 
-// EXTERNAL MODULE: external "@nuxt/ufo"
-var ufo_ = __webpack_require__(1);
+// EXTERNAL MODULE: external "ufo"
+var external_ufo_ = __webpack_require__(1);
 
 // EXTERNAL MODULE: external "node-fetch"
-var external_node_fetch_ = __webpack_require__(14);
+var external_node_fetch_ = __webpack_require__(12);
 var external_node_fetch_default = /*#__PURE__*/__webpack_require__.n(external_node_fetch_);
 
 // CONCATENATED MODULE: ./.nuxt/middleware.js
 const middleware = {};
-middleware['authenticated'] = __webpack_require__(18);
+middleware['authenticated'] = __webpack_require__(17);
 middleware['authenticated'] = middleware['authenticated'].default || middleware['authenticated'];
-middleware['notauthenicated'] = __webpack_require__(19);
-middleware['notauthenicated'] = middleware['notauthenicated'].default || middleware['notauthenicated'];
+middleware['notAuthenticated'] = __webpack_require__(18);
+middleware['notAuthenticated'] = middleware['notAuthenticated'].default || middleware['notAuthenticated'];
 /* harmony default export */ var _nuxt_middleware = (middleware);
 // CONCATENATED MODULE: ./.nuxt/utils.js
 
@@ -766,6 +766,15 @@ middleware['notauthenicated'] = middleware['notauthenicated'].default || middlew
 
 if (false) {}
 
+function createGetCounter(counterObject, defaultKey = '') {
+  return function getCounter(id = defaultKey) {
+    if (counterObject[id] === undefined) {
+      counterObject[id] = 0;
+    }
+
+    return counterObject[id]++;
+  };
+}
 function empty() {}
 function globalHandleError(error) {
   if (external_vue_default.a.config.errorHandler) {
@@ -893,7 +902,25 @@ function resolveRouteComponents(route, fn) {
   return Promise.all(flatMapComponents(route, async (Component, instance, match, key) => {
     // If component is a function, resolve it
     if (typeof Component === 'function' && !Component.options) {
-      Component = await Component();
+      try {
+        Component = await Component();
+      } catch (error) {
+        // Handle webpack chunk loading errors
+        // This may be due to a new deployment or a network problem
+        if (error && error.name === 'ChunkLoadError' && typeof window !== 'undefined' && window.sessionStorage) {
+          const timeNow = Date.now();
+          const previousReloadTime = parseInt(window.sessionStorage.getItem('nuxt-reload')); // check for previous reload time not to reload infinitely
+
+          if (!previousReloadTime || previousReloadTime + 60000 < timeNow) {
+            window.sessionStorage.setItem('nuxt-reload', timeNow);
+            window.location.reload(true
+            /* skip cache */
+            );
+          }
+        }
+
+        throw error;
+      }
     }
 
     match.components[key] = Component = sanitizeComponent(Component);
@@ -927,15 +954,15 @@ async function setContext(app, context) {
       store: app.store,
       payload: context.payload,
       error: context.error,
-      base: '/',
+      base: app.router.options.base,
       env: {}
     }; // Only set once
 
-    if ( true && context.req) {
+    if (context.req) {
       app.context.req = context.req;
     }
 
-    if ( true && context.res) {
+    if (context.res) {
       app.context.res = context.res;
     }
 
@@ -971,7 +998,7 @@ async function setContext(app, context) {
           status
         });
       } else {
-        path = formatUrl(path, query);
+        path = Object(external_ufo_["withQuery"])(path, query);
 
         if (true) {
           app.context.next({
@@ -1058,7 +1085,7 @@ function getLocation(base, mode) {
   }
 
   const fullPath = (path || '/') + window.location.search + window.location.hash;
-  return Object(ufo_["normalizeURL"])(fullPath);
+  return Object(external_ufo_["normalizeURL"])(fullPath);
 } // Imported from path-to-regexp
 
 /**
@@ -1330,73 +1357,6 @@ function tokensToFunction(tokens, options) {
 function flags(options) {
   return options && options.sensitive ? '' : 'i';
 }
-/**
- * Format given url, append query to url query string
- *
- * @param  {string} url
- * @param  {string} query
- * @return {string}
- */
-
-
-function formatUrl(url, query) {
-  let protocol;
-  const index = url.indexOf('://');
-
-  if (index !== -1) {
-    protocol = url.substring(0, index);
-    url = url.substring(index + 3);
-  } else if (url.startsWith('//')) {
-    url = url.substring(2);
-  }
-
-  let parts = url.split('/');
-  let result = (protocol ? protocol + '://' : '//') + parts.shift();
-  let path = parts.join('/');
-
-  if (path === '' && parts.length === 1) {
-    result += '/';
-  }
-
-  let hash;
-  parts = path.split('#');
-
-  if (parts.length === 2) {
-    [path, hash] = parts;
-  }
-
-  result += path ? '/' + path : '';
-
-  if (query && JSON.stringify(query) !== '{}') {
-    result += (url.split('?').length === 2 ? '&' : '?') + formatQuery(query);
-  }
-
-  result += hash ? '#' + hash : '';
-  return result;
-}
-/**
- * Transform data object to query string
- *
- * @param  {object} query
- * @return {string}
- */
-
-
-function formatQuery(query) {
-  return Object.keys(query).sort().map(key => {
-    const val = query[key];
-
-    if (val == null) {
-      return '';
-    }
-
-    if (Array.isArray(val)) {
-      return val.slice().map(val2 => [key, '=', val2].join('')).join('&');
-    }
-
-    return key + '=' + val;
-  }).filter(Boolean).join('&');
-}
 
 function addLifecycleHook(vm, hook, fn) {
   if (!vm.$options[hook]) {
@@ -1407,15 +1367,9 @@ function addLifecycleHook(vm, hook, fn) {
     vm.$options[hook].push(fn);
   }
 }
-function urlJoin() {
-  return [].slice.call(arguments).join('/').replace(/\/+/g, '/').replace(':/', '://');
-}
-function stripTrailingSlash(path) {
-  return path.replace(/\/+$/, '') || '/';
-}
-function isSamePath(p1, p2) {
-  return stripTrailingSlash(p1) === stripTrailingSlash(p2);
-}
+const urlJoin = external_ufo_["joinURL"];
+const stripTrailingSlash = external_ufo_["withoutTrailingSlash"];
+const isSamePath = external_ufo_["isSamePath"];
 function setScrollRestoration(newVal) {
   try {
     window.history.scrollRestoration = newVal;
@@ -1441,14 +1395,14 @@ async function serverPrefetch() {
 
   this.$fetchState.pending = false; // Define an ssrKey for hydration
 
-  this._fetchKey = this.$ssrContext.nuxt.fetch.length; // Add data-fetch-key on parent element of Component
+  this._fetchKey = this._fetchKey || this.$ssrContext.fetchCounters['']++; // Add data-fetch-key on parent element of Component
 
   const attrs = this.$vnode.data.attrs = this.$vnode.data.attrs || {};
   attrs['data-fetch-key'] = this._fetchKey; // Add to ssrContext for window.__NUXT__.fetch
 
-  this.$ssrContext.nuxt.fetch.push(this.$fetchState.error ? {
+  this.$ssrContext.nuxt.fetch[this._fetchKey] = this.$fetchState.error ? {
     _error: this.$fetchState.error
-  } : purifyData(this._data));
+  } : purifyData(this._data);
 }
 
 /* harmony default export */ var fetch_server = ({
@@ -1461,6 +1415,16 @@ async function serverPrefetch() {
       this._fetchOnServer = this.$options.fetchOnServer.call(this) !== false;
     } else {
       this._fetchOnServer = this.$options.fetchOnServer !== false;
+    }
+
+    const defaultKey = this.$options._scopeId || this.$options.name || '';
+    const getCounter = createGetCounter(this.$ssrContext.fetchCounters, defaultKey);
+
+    if (typeof this.$options.fetchKey === 'function') {
+      this._fetchKey = this.$options.fetchKey.call(this, getCounter);
+    } else {
+      const key = 'string' === typeof this.$options.fetchKey ? this.$options.fetchKey : defaultKey;
+      this._fetchKey = key ? key + ':' + getCounter(key) : String(getCounter(key));
     } // Added for remove vue undefined warning while ssr
 
 
@@ -1481,19 +1445,19 @@ var external_vuex_ = __webpack_require__(3);
 var external_vuex_default = /*#__PURE__*/__webpack_require__.n(external_vuex_);
 
 // EXTERNAL MODULE: external "vue-meta"
-var external_vue_meta_ = __webpack_require__(15);
+var external_vue_meta_ = __webpack_require__(13);
 var external_vue_meta_default = /*#__PURE__*/__webpack_require__.n(external_vue_meta_);
 
 // EXTERNAL MODULE: external "vue-client-only"
-var external_vue_client_only_ = __webpack_require__(7);
+var external_vue_client_only_ = __webpack_require__(6);
 var external_vue_client_only_default = /*#__PURE__*/__webpack_require__.n(external_vue_client_only_);
 
 // EXTERNAL MODULE: external "vue-no-ssr"
-var external_vue_no_ssr_ = __webpack_require__(5);
+var external_vue_no_ssr_ = __webpack_require__(4);
 var external_vue_no_ssr_default = /*#__PURE__*/__webpack_require__.n(external_vue_no_ssr_);
 
 // EXTERNAL MODULE: external "vue-router"
-var external_vue_router_ = __webpack_require__(4);
+var external_vue_router_ = __webpack_require__(7);
 var external_vue_router_default = /*#__PURE__*/__webpack_require__.n(external_vue_router_);
 
 // CONCATENATED MODULE: ./.nuxt/router.scrollBehavior.js
@@ -1501,30 +1465,40 @@ var external_vue_router_default = /*#__PURE__*/__webpack_require__.n(external_vu
 
 if (false) {}
 
+function shouldScrollToTop(route) {
+  const Pages = getMatchedComponents(route);
+
+  if (Pages.length === 1) {
+    const {
+      options = {}
+    } = Pages[0];
+    return options.scrollToTop !== false;
+  }
+
+  return Pages.some(({
+    options
+  }) => options && options.scrollToTop);
+}
+
 /* harmony default export */ var router_scrollBehavior = (function (to, from, savedPosition) {
   // If the returned position is falsy or an empty object, will retain current scroll position
   let position = false;
-  const Pages = getMatchedComponents(to); // Scroll to the top of the page if...
+  const isRouteChanged = to !== from; // savedPosition is only available for popstate navigations (back button)
 
-  if ( // One of the children set `scrollToTop`
-  Pages.some(Page => Page.options.scrollToTop) || // scrollToTop set in only page without children
-  Pages.length < 2 && Pages.every(Page => Page.options.scrollToTop !== false)) {
+  if (savedPosition) {
+    position = savedPosition;
+  } else if (isRouteChanged && shouldScrollToTop(to)) {
     position = {
       x: 0,
       y: 0
     };
-  } // savedPosition is only available for popstate navigations (back button)
-
-
-  if (savedPosition) {
-    position = savedPosition;
   }
 
   const nuxt = window.$nuxt;
 
-  if ( // Route hash changes
-  to.path === from.path && to.hash !== from.hash || // Initial load (vuejs/vue-router#3199)
-  to === from) {
+  if ( // Initial load (vuejs/vue-router#3199)
+  !isRouteChanged || // Route hash changes
+  to.path === from.path && to.hash !== from.hash) {
     nuxt.$nextTick(() => nuxt.$emit('triggerScroll'));
   }
 
@@ -1563,28 +1537,21 @@ if (false) {}
 
 
 
-const _328cba92 = () => interopDefault(__webpack_require__.e(/* import() */ 3).then(__webpack_require__.bind(null, 33)));
+const _1bbd92d8 = () => interopDefault(__webpack_require__.e(/* import() */ 4).then(__webpack_require__.bind(null, 31)));
 
-const _259b6e47 = () => interopDefault(__webpack_require__.e(/* import() */ 2).then(__webpack_require__.bind(null, 32)));
+const _98dcbfe6 = () => interopDefault(__webpack_require__.e(/* import() */ 2).then(__webpack_require__.bind(null, 29)));
 
-const _e3eab9fe = () => interopDefault(__webpack_require__.e(/* import() */ 5).then(__webpack_require__.bind(null, 31)));
+const _824aac0a = () => interopDefault(__webpack_require__.e(/* import() */ 5).then(__webpack_require__.bind(null, 30)));
 
-const _0f14b741 = () => interopDefault(__webpack_require__.e(/* import() */ 6).then(__webpack_require__.bind(null, 34)));
+const _4bfee7bb = () => interopDefault(__webpack_require__.e(/* import() */ 6).then(__webpack_require__.bind(null, 32)));
 
-const _64c2418b = () => interopDefault(__webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(null, 35)));
+const _75c3bf5e = () => interopDefault(__webpack_require__.e(/* import() */ 7).then(__webpack_require__.bind(null, 33)));
 
-const _26bde0d5 = () => interopDefault(__webpack_require__.e(/* import() */ 4).then(__webpack_require__.bind(null, 36)));
+const _0feeb91b = () => interopDefault(__webpack_require__.e(/* import() */ 3).then(__webpack_require__.bind(null, 34)));
 
-const _14420ae4 = () => interopDefault(__webpack_require__.e(/* import() */ 1).then(__webpack_require__.bind(null, 30))); // TODO: remove in Nuxt 3
-
+const _32c92b08 = () => interopDefault(__webpack_require__.e(/* import() */ 1).then(__webpack_require__.bind(null, 28)));
 
 const emptyFn = () => {};
-
-const originalPush = external_vue_router_default.a.prototype.push;
-
-external_vue_router_default.a.prototype.push = function push(location, onComplete = emptyFn, onAbort) {
-  return originalPush.call(this, location, onComplete, onAbort);
-};
 
 external_vue_default.a.use(external_vue_router_default.a);
 const routerOptions = {
@@ -1595,64 +1562,59 @@ const routerOptions = {
   scrollBehavior: router_scrollBehavior,
   routes: [{
     path: "/",
-    component: _328cba92,
+    component: _1bbd92d8,
     children: [{
-      path: "/",
-      component: _259b6e47,
+      path: "",
+      component: _98dcbfe6,
       name: "home"
     }, {
       path: "/login",
-      component: _e3eab9fe,
+      component: _824aac0a,
       name: "login"
     }, {
       path: "/register",
-      component: _e3eab9fe,
+      component: _824aac0a,
       name: "register"
     }, {
       path: "/profile/:username",
-      component: _0f14b741,
+      component: _4bfee7bb,
       name: "profile"
     }, {
       path: "/settings",
-      component: _64c2418b,
+      component: _75c3bf5e,
       name: "settings"
     }, {
       path: "/editor",
-      component: _26bde0d5,
+      component: _0feeb91b,
       name: "editor"
     }, {
       path: "/article/:slug",
-      component: _14420ae4,
+      component: _32c92b08,
       name: "article"
     }]
   }],
   fallback: false
 };
+function createRouter(ssrContext, config) {
+  const base = config._app && config._app.basePath || routerOptions.base;
+  const router = new external_vue_router_default.a({ ...routerOptions,
+    base
+  }); // TODO: remove in Nuxt 3
 
-function decodeObj(obj) {
-  for (const key in obj) {
-    if (typeof obj[key] === 'string') {
-      obj[key] = Object(ufo_["decode"])(obj[key]);
-    }
-  }
-}
+  const originalPush = router.push;
 
-function createRouter() {
-  const router = new external_vue_router_default.a(routerOptions);
+  router.push = function push(location, onComplete = emptyFn, onAbort) {
+    return originalPush.call(this, location, onComplete, onAbort);
+  };
+
   const resolve = router.resolve.bind(router);
 
   router.resolve = (to, current, append) => {
     if (typeof to === 'string') {
-      to = Object(ufo_["normalizeURL"])(to);
+      to = Object(external_ufo_["normalizeURL"])(to);
     }
 
-    const r = resolve(to, current, append);
-
-    if (r && r.resolved && r.resolved.query) {
-      decodeObj(r.resolved.query);
-    }
-
-    return r;
+    return resolve(to, current, append);
   };
 
   return router;
@@ -1743,14 +1705,14 @@ function createRouter() {
 });
 const transitionsKeys = ['name', 'mode', 'appear', 'css', 'type', 'duration', 'enterClass', 'leaveClass', 'appearClass', 'enterActiveClass', 'enterActiveClass', 'leaveActiveClass', 'appearActiveClass', 'enterToClass', 'leaveToClass', 'appearToClass'];
 const listenersKeys = ['beforeEnter', 'enter', 'afterEnter', 'enterCancelled', 'beforeLeave', 'leave', 'afterLeave', 'leaveCancelled', 'beforeAppear', 'appear', 'afterAppear', 'appearCancelled'];
-// CONCATENATED MODULE: ./node_modules/_vue-loader@15.9.6@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.9.6@vue-loader/lib??vue-loader-options!./.nuxt/components/nuxt-error.vue?vue&type=template&id=5eb69f1c&
+// CONCATENATED MODULE: ./node_modules/_vue-loader@15.9.7@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.9.7@vue-loader/lib??vue-loader-options!./.nuxt/components/nuxt-error.vue?vue&type=template&id=5eb69f1c&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"__nuxt-error-page"},[_vm._ssrNode("<div class=\"error\">","</div>",[_vm._ssrNode("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"90\" height=\"90\" fill=\"#DBE1EC\" viewBox=\"0 0 48 48\"><path d=\"M22 30h4v4h-4zm0-16h4v12h-4zm1.99-10C12.94 4 4 12.95 4 24s8.94 20 19.99 20S44 35.05 44 24 35.04 4 23.99 4zM24 40c-8.84 0-16-7.16-16-16S15.16 8 24 8s16 7.16 16 16-7.16 16-16 16z\"></path></svg> <div class=\"title\">"+_vm._ssrEscape(_vm._s(_vm.message))+"</div> "),(_vm.statusCode === 404)?_vm._ssrNode("<p class=\"description\">","</p>",[(typeof _vm.$route === 'undefined')?_vm._ssrNode("<a href=\"/\" class=\"error-link\">","</a>"):_c('NuxtLink',{staticClass:"error-link",attrs:{"to":"/"}},[_vm._v("Back to the home page")])],1):_vm._e(),_vm._ssrNode(" <div class=\"logo\"><a href=\"https://nuxtjs.org\" target=\"_blank\" rel=\"noopener\">Nuxt</a></div>")],2)])}
 var staticRenderFns = []
 
 
 // CONCATENATED MODULE: ./.nuxt/components/nuxt-error.vue?vue&type=template&id=5eb69f1c&
 
-// CONCATENATED MODULE: ./node_modules/_babel-loader@8.2.2@babel-loader/lib??ref--2-0!./node_modules/_vue-loader@15.9.6@vue-loader/lib??vue-loader-options!./.nuxt/components/nuxt-error.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/_babel-loader@8.2.2@babel-loader/lib??ref--2-0!./node_modules/_vue-loader@15.9.7@vue-loader/lib??vue-loader-options!./.nuxt/components/nuxt-error.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -1803,7 +1765,7 @@ var staticRenderFns = []
 });
 // CONCATENATED MODULE: ./.nuxt/components/nuxt-error.vue?vue&type=script&lang=js&
  /* harmony default export */ var components_nuxt_errorvue_type_script_lang_js_ = (nuxt_errorvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/_vue-loader@15.9.6@vue-loader/lib/runtime/componentNormalizer.js
+// EXTERNAL MODULE: ./node_modules/_vue-loader@15.9.7@vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__(2);
 
 // CONCATENATED MODULE: ./.nuxt/components/nuxt-error.vue
@@ -1812,7 +1774,7 @@ var componentNormalizer = __webpack_require__(2);
 
 function injectStyles (context) {
   
-  var style0 = __webpack_require__(20)
+  var style0 = __webpack_require__(19)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -1826,7 +1788,7 @@ var nuxt_error_component = Object(componentNormalizer["a" /* default */])(
   false,
   injectStyles,
   null,
-  "97eb9a92"
+  "7f326262"
   
 )
 
@@ -1935,7 +1897,7 @@ var nuxt_error_component = Object(componentNormalizer["a" /* default */])(
   }
 
 });
-// CONCATENATED MODULE: ./node_modules/_babel-loader@8.2.2@babel-loader/lib??ref--2-0!./node_modules/_vue-loader@15.9.6@vue-loader/lib??vue-loader-options!./.nuxt/components/nuxt-loading.vue?vue&type=script&lang=js&
+// CONCATENATED MODULE: ./node_modules/_babel-loader@8.2.2@babel-loader/lib??ref--2-0!./node_modules/_vue-loader@15.9.7@vue-loader/lib??vue-loader-options!./.nuxt/components/nuxt-loading.vue?vue&type=script&lang=js&
 /* harmony default export */ var nuxt_loadingvue_type_script_lang_js_ = ({
   name: 'NuxtLoading',
 
@@ -2116,7 +2078,7 @@ var nuxt_loading_render, nuxt_loading_staticRenderFns
 
 function nuxt_loading_injectStyles (context) {
   
-  var style0 = __webpack_require__(22)
+  var style0 = __webpack_require__(21)
 if (style0.__inject__) style0.__inject__(context)
 
 }
@@ -2130,12 +2092,12 @@ var nuxt_loading_component = Object(componentNormalizer["a" /* default */])(
   false,
   nuxt_loading_injectStyles,
   null,
-  "509f5e2b"
+  "1b0b61d4"
   
 )
 
 /* harmony default export */ var nuxt_loading = (nuxt_loading_component.exports);
-// CONCATENATED MODULE: ./node_modules/_vue-loader@15.9.6@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.9.6@vue-loader/lib??vue-loader-options!./.nuxt/layouts/default.vue?vue&type=template&id=0040005c&
+// CONCATENATED MODULE: ./node_modules/_vue-loader@15.9.7@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.9.7@vue-loader/lib??vue-loader-options!./.nuxt/layouts/default.vue?vue&type=template&id=0040005c&
 var defaultvue_type_template_id_0040005c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('Nuxt')}
 var defaultvue_type_template_id_0040005c_staticRenderFns = []
 
@@ -2156,12 +2118,13 @@ var default_component = Object(componentNormalizer["a" /* default */])(
   false,
   null,
   null,
-  "72bd32be"
+  "3e351ae8"
   
 )
 
 /* harmony default export */ var layouts_default = (default_component.exports);
 // CONCATENATED MODULE: ./.nuxt/App.js
+
 
 
 
@@ -2347,7 +2310,7 @@ external_vue_default.a.use(external_vuex_default.a);
 let store_store = {};
 
 (function updateModules() {
-  store_store = normalizeRoot(__webpack_require__(24), 'store/index.js'); // If store is an exported method = classic mode (deprecated)
+  store_store = normalizeRoot(__webpack_require__(23), 'store/index.js'); // If store is an exported method = classic mode (deprecated)
   // Enforce store modules
 
   store_store.modules = store_store.modules || {}; // If the environment supports hot reloading...
@@ -2388,16 +2351,17 @@ function normalizeModule(moduleData, filePath) {
   return moduleData;
 }
 // EXTERNAL MODULE: ./plugins/request.js
-var request = __webpack_require__(6);
+var request = __webpack_require__(5);
 
 // EXTERNAL MODULE: external "dayjs"
-var external_dayjs_ = __webpack_require__(16);
+var external_dayjs_ = __webpack_require__(15);
 var external_dayjs_default = /*#__PURE__*/__webpack_require__.n(external_dayjs_);
 
-// CONCATENATED MODULE: ./plugins/day.js
+// CONCATENATED MODULE: ./plugins/dayjs.js
 
+ // {{ 表达式 | 过滤器 }}
 
-external_vue_default.a.filter('date', (value, format = "MMM - DD, YYYY") => {
+external_vue_default.a.filter('date', (value, format = 'YYYY-MM-DD HH:mm:ss') => {
   return external_dayjs_default()(value).format(format);
 });
 // CONCATENATED MODULE: ./.nuxt/index.js
@@ -2417,7 +2381,7 @@ external_vue_default.a.filter('date', (value, format = "MMM - DD, YYYY") => {
 
  // Source: ..\\plugins\\request.js (mode: 'all')
 
- // Source: ..\\plugins\\day.js (mode: 'all')
+ // Source: ..\\plugins\\dayjs.js (mode: 'all')
 // Component: <ClientOnly>
 
 external_vue_default.a.component(external_vue_client_only_default.a.name, external_vue_client_only_default.a); // TODO: Remove in Nuxt 3: <NoSsr>
@@ -2439,7 +2403,11 @@ external_vue_default.a.component('NChild', nuxt_child); // Component NuxtLink is
 external_vue_default.a.component(components_nuxt.name, components_nuxt);
 Object.defineProperty(external_vue_default.a.prototype, '$nuxt', {
   get() {
-    return this.$root.$options.$nuxt;
+    const globalNuxt = this.$root.$options.$nuxt;
+
+    if (false) {}
+
+    return globalNuxt;
   },
 
   configurable: true
@@ -2459,18 +2427,17 @@ const defaultTransition = {
   "appearToClass": "appear-to"
 };
 const originalRegisterModule = external_vuex_default.a.Store.prototype.registerModule;
-const baseStoreOptions = {
-  preserveState: false
-};
 
 function registerModule(path, rawModule, options = {}) {
-  return originalRegisterModule.call(this, path, rawModule, { ...baseStoreOptions,
+  const preserveState =  false && (false);
+  return originalRegisterModule.call(this, path, rawModule, {
+    preserveState,
     ...options
   });
 }
 
 async function createApp(ssrContext, config = {}) {
-  const router = await createRouter(ssrContext);
+  const router = await createRouter(ssrContext, config);
   const store = createStore(ssrContext); // Add this.$router into store actions/mutations
 
   store.$router = router; // Fix SSR caveat https://github.com/nuxt/nuxt.js/issues/3757#issuecomment-414689141
@@ -2619,35 +2586,43 @@ async function createApp(ssrContext, config = {}) {
     await Object(request["a" /* default */])(app.context, inject);
   }
 
-  if (typeof /* Cannot get final name for export "default" in "./plugins/day.js" (known exports: , known reexports: ) */ undefined === 'function') {
-    await /* Cannot get final name for export "default" in "./plugins/day.js" (known exports: , known reexports: ) */ undefined(app.context, inject);
+  if (typeof /* Cannot get final name for export "default" in "./plugins/dayjs.js" (known exports: , known reexports: ) */ undefined === 'function') {
+    await /* Cannot get final name for export "default" in "./plugins/dayjs.js" (known exports: , known reexports: ) */ undefined(app.context, inject);
   } // Lock enablePreview in context
 
 
-  if (false) {} // If server-side, wait for async component to be resolved first
+  if (false) {} // Wait for async component to be resolved first
 
 
-  if ( true && ssrContext && ssrContext.url) {
-    await new Promise((resolve, reject) => {
-      router.push(ssrContext.url, resolve, err => {
-        // https://github.com/vuejs/vue-router/blob/v3.4.3/src/util/errors.js
-        if (!err._isRouter) return reject(err);
-        if (err.type !== 2
-        /* NavigationFailureType.redirected */
-        ) return resolve(); // navigated to a different route in router guard
+  await new Promise((resolve, reject) => {
+    const {
+      route
+    } = router.resolve(app.context.route.fullPath); // Ignore 404s rather than blindly replacing URL
 
-        const unregister = router.afterEach(async (to, from) => {
+    if (!route.matched.length && false) {
+      return resolve();
+    }
+
+    router.replace(route, resolve, err => {
+      // https://github.com/vuejs/vue-router/blob/v3.4.3/src/util/errors.js
+      if (!err._isRouter) return reject(err);
+      if (err.type !== 2
+      /* NavigationFailureType.redirected */
+      ) return resolve(); // navigated to a different route in router guard
+
+      const unregister = router.afterEach(async (to, from) => {
+        if ( true && ssrContext && ssrContext.url) {
           ssrContext.url = to.fullPath;
-          app.context.route = await getRouteData(to);
-          app.context.params = to.params || {};
-          app.context.query = to.query || {};
-          unregister();
-          resolve();
-        });
+        }
+
+        app.context.route = await getRouteData(to);
+        app.context.params = to.params || {};
+        app.context.query = to.query || {};
+        unregister();
+        resolve();
       });
     });
-  }
-
+  });
   return {
     store,
     app,
@@ -2680,7 +2655,6 @@ async function createApp(ssrContext, config = {}) {
 
 
 
-
  // should be included after ./index.js
 // Update serverPrefetch strategy
 
@@ -2700,12 +2674,12 @@ if (!global.fetch) {
 }
 
 const noopApp = () => new external_vue_default.a({
-  render: h => h('div')
+  render: h => h('div', {
+    domProps: {
+      id: '__nuxt'
+    }
+  })
 });
-
-function server_urlJoin() {
-  return Array.prototype.slice.call(arguments).join('/').replace(/\/+/g, '/');
-}
 
 const createNext = ssrContext => opts => {
   // If static target, render on client-side
@@ -2716,22 +2690,22 @@ const createNext = ssrContext => opts => {
     return;
   }
 
-  opts.query = Object(external_querystring_["stringify"])(opts.query);
-  opts.path = opts.path + (opts.query ? '?' + opts.query : '');
-  const routerBase = '/';
+  let fullPath = Object(external_ufo_["withQuery"])(opts.path, opts.query);
+  const $config = ssrContext.runtimeConfig || {};
+  const routerBase = $config._app && $config._app.basePath || '/';
 
-  if (!opts.path.startsWith('http') && routerBase !== '/' && !opts.path.startsWith(routerBase)) {
-    opts.path = server_urlJoin(routerBase, opts.path);
+  if (!fullPath.startsWith('http') && routerBase !== '/' && !fullPath.startsWith(routerBase)) {
+    fullPath = Object(external_ufo_["joinURL"])(routerBase, fullPath);
   } // Avoid loop redirect
 
 
-  if (decodeURI(opts.path) === decodeURI(ssrContext.url)) {
+  if (decodeURI(fullPath) === decodeURI(ssrContext.url)) {
     ssrContext.redirected = false;
     return;
   }
 
   ssrContext.res.writeHead(opts.status, {
-    Location: Object(ufo_["normalizeURL"])(opts.path)
+    Location: Object(external_ufo_["normalizeURL"])(fullPath)
   });
   ssrContext.res.end();
 }; // This exported function will be called by `bundleRenderer`.
@@ -2751,25 +2725,27 @@ const createNext = ssrContext => opts => {
   ssrContext.nuxt = {
     layout: 'default',
     data: [],
-    fetch: [],
+    fetch: {},
     error: null,
     state: null,
     serverRendered: true,
     routePath: ''
-  }; // Remove query from url is static target
+  };
+  ssrContext.fetchCounters = {}; // Remove query from url is static target
+  // Public runtime config
 
-  if (false) {} // Public runtime config
+  ssrContext.nuxt.config = ssrContext.runtimeConfig.public;
 
+  if (ssrContext.nuxt.config._app) {
+    __webpack_require__.p = Object(external_ufo_["joinURL"])(ssrContext.nuxt.config._app.cdnURL, ssrContext.nuxt.config._app.assetsPath);
+  } // Create the app definition and the instance (created for each request)
 
-  ssrContext.nuxt.config = ssrContext.runtimeConfig.public; // Create the app definition and the instance (created for each request)
 
   const {
     app,
     router,
     store
-  } = await createApp(ssrContext, { ...ssrContext.runtimeConfig.public,
-    ...ssrContext.runtimeConfig.private
-  });
+  } = await createApp(ssrContext, ssrContext.runtimeConfig.private);
 
   const _app = new external_vue_default.a(app); // Add ssr route path to nuxt context so we can account for page navigation between ssr and csr
 
@@ -2821,7 +2797,7 @@ const createNext = ssrContext => opts => {
   }; // Components are already resolved by setContext -> getRouteData (app/utils.js)
 
 
-  const Components = getMatchedComponents(router.match(ssrContext.url));
+  const Components = getMatchedComponents(app.context.route);
   /*
   ** Dispatch store nuxtServerInit
   */
@@ -3011,7 +2987,7 @@ const createNext = ssrContext => opts => {
 });
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports) {
 
 module.exports = require("markdown-it");

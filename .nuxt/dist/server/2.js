@@ -1,161 +1,153 @@
 exports.ids = [2];
 exports.modules = {
 
-/***/ 28:
+/***/ 27:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return getArticles; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getFeedArticles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return getYourFeedArticles; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return addFavorite; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return delFavorite; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return deleteFavorite; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getArticle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return getComments; });
-/* harmony import */ var _plugins_request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6);
- //user
+/* harmony import */ var _plugins_request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5);
+ // 获取公共文章列表
 
 const getArticles = params => {
   return Object(_plugins_request__WEBPACK_IMPORTED_MODULE_0__[/* request */ "b"])({
-    method: "GET",
-    url: "/api/articles",
+    method: 'GET',
+    url: '/api/articles',
     params
   });
-};
-const getFeedArticles = params => {
+}; // 获取公共文章列表
+
+const getYourFeedArticles = params => {
   return Object(_plugins_request__WEBPACK_IMPORTED_MODULE_0__[/* request */ "b"])({
-    method: "GET",
-    url: "/api/articles/feed",
+    method: 'GET',
+    url: '/api/articles/feed',
     params // headers: {
-    //     Authorization: `Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTMwMzUzLCJ1c2VybmFtZSI6ImhhbmRzb21lMTIyIiwiZXhwIjoxNjEzODg2NTgwfQ.W9OY4mN9cUqTQ4chuKj8oT6mXQFqcmI3euEhh7Q-WBg`
+    //   // 添加用户身份，数据格式：Token空格Token数据
+    //   Authorization: `Token eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6NDgxMTYsInVzZXJuYW1lIjoibHB6OTk5IiwiZXhwIjoxNTk3NzQxNTA4fQ.2yO8Fss4hYnvsIN2UYHsutQ1hmYqSSAA-UrIRnP4DOY`
     // }
 
   });
-};
+}; // 添加点赞
+
 const addFavorite = slug => {
   return Object(_plugins_request__WEBPACK_IMPORTED_MODULE_0__[/* request */ "b"])({
-    method: "POST",
+    method: 'POST',
     url: `/api/articles/${slug}/favorite`
   });
-};
-const delFavorite = slug => {
+}; // 取消点赞
+
+const deleteFavorite = slug => {
   return Object(_plugins_request__WEBPACK_IMPORTED_MODULE_0__[/* request */ "b"])({
-    method: "DELETE",
+    method: 'DELETE',
     url: `/api/articles/${slug}/favorite`
   });
-};
+}; // 获取文章详情
+
 const getArticle = slug => {
   return Object(_plugins_request__WEBPACK_IMPORTED_MODULE_0__[/* request */ "b"])({
-    method: "GET",
+    method: 'GET',
     url: `/api/articles/${slug}`
   });
-};
+}; // 获取文章评论
+
 const getComments = slug => {
   return Object(_plugins_request__WEBPACK_IMPORTED_MODULE_0__[/* request */ "b"])({
-    method: "GET",
+    method: 'GET',
     url: `/api/articles/${slug}/comments`
   });
 };
 
 /***/ }),
 
-/***/ 32:
+/***/ 29:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/_vue-loader@15.9.6@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.9.6@vue-loader/lib??vue-loader-options!./pages/home/index.vue?vue&type=template&id=d554f9d0&scoped=true&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"home-page"},[_vm._ssrNode("<div class=\"banner\" data-v-d554f9d0><div class=\"container\" data-v-d554f9d0><h1 class=\"logo-font\" data-v-d554f9d0>conduit</h1> <p data-v-d554f9d0>A place to share your knowledge.</p></div></div> "),_vm._ssrNode("<div class=\"container page\" data-v-d554f9d0>","</div>",[_vm._ssrNode("<div class=\"row\" data-v-d554f9d0>","</div>",[_vm._ssrNode("<div class=\"col-md-9\" data-v-d554f9d0>","</div>",[_vm._ssrNode("<div class=\"feed-toggle\" data-v-d554f9d0>","</div>",[_vm._ssrNode("<ul class=\"nav nav-pills outline-active\" data-v-d554f9d0>","</ul>",[(_vm.user)?_vm._ssrNode("<li class=\"nav-item\" data-v-d554f9d0>","</li>",[_c('nuxt-link',{staticClass:"nav-link",class:{
-                  active: _vm.tab === 'your_feed',
+// CONCATENATED MODULE: ./node_modules/_vue-loader@15.9.7@vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/_vue-loader@15.9.7@vue-loader/lib??vue-loader-options!./pages/home/index.vue?vue&type=template&id=b72ced0e&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"home-page"},[_vm._ssrNode("<div class=\"banner\"><div class=\"container\"><h1 class=\"logo-font\">拉勾教育</h1> <p>A place to share your knowledge.</p></div></div> "),_vm._ssrNode("<div class=\"container page\">","</div>",[_vm._ssrNode("<div class=\"row\">","</div>",[_vm._ssrNode("<div class=\"col-md-9\">","</div>",[_vm._ssrNode("<div class=\"feed-toggle\">","</div>",[_vm._ssrNode("<ul class=\"nav nav-pills outline-active\">","</ul>",[(_vm.user)?_vm._ssrNode("<li class=\"nav-item\">","</li>",[_c('nuxt-link',{staticClass:"nav-link",class:{
+                  active: _vm.tab === 'your_feed'
                 },attrs:{"exact":"","to":{
                   name: 'home',
                   query: {
-                    tab: 'your_feed',
-                  },
-                }}},[_vm._v("Your Feed")])],1):_vm._e(),_vm._ssrNode(" "),_vm._ssrNode("<li class=\"nav-item\" data-v-d554f9d0>","</li>",[_c('nuxt-link',{staticClass:"nav-link",class:{
-                  active: _vm.tab === 'global_feed',
+                    tab: 'your_feed'
+                  }
+                }}},[_vm._v("Your Feed")])],1):_vm._e(),_vm._ssrNode(" "),_vm._ssrNode("<li class=\"nav-item\">","</li>",[_c('nuxt-link',{staticClass:"nav-link",class:{
+                  active: _vm.tab === 'global_feed'
+                },attrs:{"exact":"","to":{
+                  name: 'home'
+                }}},[_vm._v("Global Feed")])],1),_vm._ssrNode(" "),(_vm.tag)?_vm._ssrNode("<li class=\"nav-item\">","</li>",[_c('nuxt-link',{staticClass:"nav-link",class:{
+                  active: _vm.tab === 'tag'
                 },attrs:{"exact":"","to":{
                   name: 'home',
-                }}},[_vm._v("Global Feed")])],1),_vm._ssrNode(" "),(_vm.tag)?_vm._ssrNode("<li class=\"nav-item\" data-v-d554f9d0>","</li>",[_c('nuxt-link',{staticClass:"nav-link",class:{
-                  active: _vm.tab === 'tag',
-                },attrs:{"exact":"","to":{
-                  name: 'home',
-                  tag: _vm.tag,
-                }}},[_vm._v("#"+_vm._s(_vm.tag))])],1):_vm._e()],2)]),_vm._ssrNode(" "),_vm._l((_vm.articles),function(article,index){return _vm._ssrNode("<div class=\"article-preview\" data-v-d554f9d0>","</div>",[_vm._ssrNode("<div class=\"article-meta\" data-v-d554f9d0>","</div>",[_c('nuxt-link',{attrs:{"to":{
+                  query: {
+                    tab: 'tag',
+                    tag: _vm.tag
+                  }
+                }}},[_vm._v("# "+_vm._s(_vm.tag))])],1):_vm._e()],2)]),_vm._ssrNode(" "),_vm._l((_vm.articles),function(article){return _vm._ssrNode("<div class=\"article-preview\">","</div>",[_vm._ssrNode("<div class=\"article-meta\">","</div>",[_c('nuxt-link',{attrs:{"to":{
+              name: 'profile',
+              params: {
+                username: article.author.username
+              }
+            }}},[_c('img',{attrs:{"src":article.author.image}})]),_vm._ssrNode(" "),_vm._ssrNode("<div class=\"info\">","</div>",[_c('nuxt-link',{staticClass:"author",attrs:{"to":{
                 name: 'profile',
                 params: {
-                  username: article.author.username,
-                },
-              }}},[_c('img',{attrs:{"src":article.author.image}})]),_vm._ssrNode(" "),_vm._ssrNode("<div class=\"info\" data-v-d554f9d0>","</div>",[_c('nuxt-link',{staticClass:"author",attrs:{"to":{
-                  name: 'profile',
-                  params: {
-                    username: article.author.username,
-                  },
-                }}},[_vm._v(_vm._s(article.author.username))]),_vm._ssrNode(" <span class=\"date\" data-v-d554f9d0>"+_vm._ssrEscape(_vm._s(_vm._f("date")(article.createdAt)))+"</span>")],2),_vm._ssrNode(" <button"+(_vm._ssrAttr("disabled",article.favoriteDisable))+(_vm._ssrClass("btn btn-outline-primary btn-sm pull-xs-right",{
-                active: article.favorited,
-              }))+" data-v-d554f9d0><i class=\"ion-heart\" data-v-d554f9d0></i>"+_vm._ssrEscape(" "+_vm._s(article.favoritesCount)+"\n            ")+"</button>")],2),_vm._ssrNode(" "),_c('nuxt-link',{staticClass:"preview-link",attrs:{"href":"","to":{
+                  username: article.author.username
+                }
+              }}},[_vm._v("\n                "+_vm._s(article.author.username)+"\n              ")]),_vm._ssrNode(" <span class=\"date\">"+_vm._ssrEscape(_vm._s(_vm._f("date")(article.createdAt,'MMM DD, YYYY')))+"</span>")],2),_vm._ssrNode(" <button"+(_vm._ssrAttr("disabled",article.favoriteDisabled))+(_vm._ssrClass("btn btn-outline-primary btn-sm pull-xs-right",{
+                active: article.favorited
+              }))+"><i class=\"ion-heart\"></i>"+_vm._ssrEscape(" "+_vm._s(article.favoritesCount)+"\n            ")+"</button>")],2),_vm._ssrNode(" "),_c('nuxt-link',{staticClass:"preview-link",attrs:{"to":{
               name: 'article',
               params: {
-                slug: article.slug,
-              },
-            }}},[_c('h1',[_vm._v(_vm._s(article.title))]),_vm._v(" "),_c('p',[_vm._v(_vm._s(article.description))]),_vm._v(" "),_c('span',[_vm._v("Read more...")])])],2)}),_vm._ssrNode(" "),_vm._ssrNode("<nav data-v-d554f9d0>","</nav>",[_vm._ssrNode("<ul class=\"pagination\" data-v-d554f9d0>","</ul>",_vm._l((_vm.totalPage),function(item){return _vm._ssrNode("<li"+(_vm._ssrClass("page-item",{
-                active: item === _vm.page,
-              }))+" data-v-d554f9d0>","</li>",[_c('nuxt-link',{staticClass:"page-link",attrs:{"to":{
+                slug: article.slug
+              }
+            }}},[_c('h1',[_vm._v(_vm._s(article.title))]),_vm._v(" "),_c('p',[_vm._v(_vm._s(article.description))]),_vm._v(" "),_c('span',[_vm._v("Read more...")])])],2)}),_vm._ssrNode(" "),_vm._ssrNode("<nav>","</nav>",[_vm._ssrNode("<ul class=\"pagination\">","</ul>",_vm._l((_vm.totalPage),function(item){return _vm._ssrNode("<li"+(_vm._ssrClass("page-item",{
+                active: item === _vm.page
+              }))+">","</li>",[_c('nuxt-link',{staticClass:"page-link",attrs:{"to":{
                   name: 'home',
                   query: {
                     page: item,
                     tag: _vm.$route.query.tag,
-                    tab: _vm.tab,
-                  },
-                }}},[_vm._v(_vm._s(item))])],1)}),0)])],2),_vm._ssrNode(" <div class=\"col-md-3\" data-v-d554f9d0><div class=\"sidebar\" data-v-d554f9d0><p data-v-d554f9d0>Popular Tags</p> <div class=\"tag-list\" data-v-d554f9d0><a href class=\"tag-pill tag-default\" data-v-d554f9d0>programming</a> <a href class=\"tag-pill tag-default\" data-v-d554f9d0>javascript</a> <a href class=\"tag-pill tag-default\" data-v-d554f9d0>emberjs</a> <a href class=\"tag-pill tag-default\" data-v-d554f9d0>angularjs</a> <a href class=\"tag-pill tag-default\" data-v-d554f9d0>react</a> <a href class=\"tag-pill tag-default\" data-v-d554f9d0>mean</a> <a href class=\"tag-pill tag-default\" data-v-d554f9d0>node</a> <a href class=\"tag-pill tag-default\" data-v-d554f9d0>rails</a></div></div></div> "),_vm._ssrNode("<div class=\"col-md-9\" data-v-d554f9d0>","</div>",[_vm._ssrNode("<div class=\"sidebar\" data-v-d554f9d0>","</div>",[_vm._ssrNode("<p data-v-d554f9d0>Popular Tags</p> "),_vm._ssrNode("<div class=\"tag-list\" data-v-d554f9d0>","</div>",_vm._l((_vm.tagResult),function(item,index){return _c('nuxt-link',{key:index,staticClass:"tag-pill tag-default",attrs:{"to":{
+                    tab: _vm.tab
+                  }
+                }}},[_vm._v(_vm._s(item))])],1)}),0)])],2),_vm._ssrNode(" "),_vm._ssrNode("<div class=\"col-md-3\">","</div>",[_vm._ssrNode("<div class=\"sidebar\">","</div>",[_vm._ssrNode("<p>Popular Tags</p> "),_vm._ssrNode("<div class=\"tag-list\">","</div>",_vm._l((_vm.tags),function(item){return _c('nuxt-link',{key:item,staticClass:"tag-pill tag-default",attrs:{"to":{
                 name: 'home',
                 query: {
                   tab: 'tag',
-                  tag: item,
-                },
+                  tag: item
+                }
               }}},[_vm._v(_vm._s(item))])}),1)],2)])],2)])],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./pages/home/index.vue?vue&type=template&id=d554f9d0&scoped=true&
+// CONCATENATED MODULE: ./pages/home/index.vue?vue&type=template&id=b72ced0e&
 
-// EXTERNAL MODULE: ./api/articles.js
-var api_articles = __webpack_require__(28);
+// EXTERNAL MODULE: ./api/article.js
+var api_article = __webpack_require__(27);
 
 // EXTERNAL MODULE: ./plugins/request.js
-var request = __webpack_require__(6);
+var request = __webpack_require__(5);
 
 // CONCATENATED MODULE: ./api/tag.js
-//获取文章标签列表
+ // 获取文章标签列表
 
 const getTags = () => {
   return Object(request["b" /* request */])({
-    method: "GET",
-    url: "/api/tags"
+    method: 'GET',
+    url: '/api/tags'
   });
 };
 // EXTERNAL MODULE: external "vuex"
 var external_vuex_ = __webpack_require__(3);
 
-// CONCATENATED MODULE: ./node_modules/_babel-loader@8.2.2@babel-loader/lib??ref--2-0!./node_modules/_vue-loader@15.9.6@vue-loader/lib??vue-loader-options!./pages/home/index.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+// CONCATENATED MODULE: ./node_modules/_babel-loader@8.2.2@babel-loader/lib??ref--2-0!./node_modules/_vue-loader@15.9.7@vue-loader/lib??vue-loader-options!./pages/home/index.vue?vue&type=script&lang=js&
 //
 //
 //
@@ -329,82 +321,79 @@ var external_vuex_ = __webpack_require__(3);
 
 
 /* harmony default export */ var homevue_type_script_lang_js_ = ({
-  name: "HomeIndex",
-  watchQuery: ["page", "tag", "tab"],
+  name: 'HomeIndex',
 
   async asyncData({
-    query,
-    store
+    query
   }) {
-    let page = Number.parseInt(query.page) || 1;
-    let limit = 20;
-    const {
-      tag
-    } = query;
-    const tab = query.tab || "global_feed";
-    const loadArticles = store.state.user && tab === "your_feed" ? api_articles["f" /* getFeedArticles */] : api_articles["d" /* getArticles */];
-    const [articlesRes, tagRes] = await Promise.all([loadArticles({
+    const page = Number.parseInt(query.page || 1);
+    const limit = 20;
+    const tab = query.tab || 'global_feed';
+    const tag = query.tag;
+    const loadArticles = tab === 'global_feed' ? api_article["d" /* getArticles */] : api_article["f" /* getYourFeedArticles */];
+    const [articleRes, tagRes] = await Promise.all([loadArticles({
       limit,
       offset: (page - 1) * limit,
-      tag: query.tag
+      tag
     }), getTags()]);
-    let {
+    const {
       articles,
       articlesCount
-    } = articlesRes.data;
-    let {
+    } = articleRes.data;
+    const {
       tags
     } = tagRes.data;
-    articles.forEach(article => article.favoriteDisable = false); //tags = tags.splice(0, 20); //数据处理
-
+    articles.forEach(article => article.favoriteDisabled = false);
     return {
       articles,
+      // 文章列表
       articlesCount,
+      // 文章总数
+      tags,
+      // 标签列表
       limit,
-      //条数
+      // 每页大小
       page,
-      //页数
-      tagResult: tags,
-      //标签
-      tag,
-      tab: query.tab || "global_feed"
+      // 页码
+      tab,
+      // 选项卡
+      tag // 数据标签
+
     };
   },
 
-  data() {
-    return {};
-  },
+  watchQuery: ['page', 'tag', 'tab'],
+  computed: { ...Object(external_vuex_["mapState"])(['user']),
 
+    totalPage() {
+      return Math.ceil(this.articlesCount / this.limit);
+    }
+
+  },
   methods: {
     async onFavorite(article) {
+      article.favoriteDisabled = true;
+
       if (article.favorited) {
-        await Object(api_articles["b" /* delFavorite */])(article.slug);
+        // 取消点赞
+        await Object(api_article["b" /* deleteFavorite */])(article.slug);
         article.favorited = false;
         article.favoritesCount += -1;
       } else {
-        await Object(api_articles["a" /* addFavorite */])(article.slug);
+        // 添加点赞
+        await Object(api_article["a" /* addFavorite */])(article.slug);
         article.favorited = true;
         article.favoritesCount += 1;
       }
 
-      article.favoriteDisable = true;
+      article.favoriteDisabled = false;
     }
 
-  },
-
-  mounted() {},
-
-  computed: {
-    totalPage() {
-      return Math.ceil(this.articlesCount / this.limit);
-    },
-
-    ...Object(external_vuex_["mapState"])(["user"])
   }
 });
 // CONCATENATED MODULE: ./pages/home/index.vue?vue&type=script&lang=js&
  /* harmony default export */ var pages_homevue_type_script_lang_js_ = (homevue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./node_modules/_vue-loader@15.9.6@vue-loader/lib/runtime/componentNormalizer.js
+// EXTERNAL MODULE: ./node_modules/_vue-loader@15.9.7@vue-loader/lib/runtime/componentNormalizer.js
 var componentNormalizer = __webpack_require__(2);
 
 // CONCATENATED MODULE: ./pages/home/index.vue
@@ -424,8 +413,8 @@ var component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   injectStyles,
-  "d554f9d0",
-  "b67a9882"
+  null,
+  "647ba0f4"
   
 )
 
